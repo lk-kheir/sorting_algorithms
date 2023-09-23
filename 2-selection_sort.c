@@ -1,9 +1,15 @@
 #include "sort.h"
 
+/**
+ * selection_sort - selection sort algorithm
+ * @array: array
+ * @size: size
+ * Return: NULL
+*/
 void selection_sort(int *array, size_t size)
 {
-	size_t i, j;
-	int min, tmp;
+	size_t i, j, min;
+	int tmp;
 
 	if (array == NULL || size < 2)
 		return;
@@ -25,5 +31,5 @@ void selection_sort(int *array, size_t size)
 			array[min] = tmp;
 			print_array(array, size);
 		}
-	}		
+	}
 }
