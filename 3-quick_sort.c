@@ -1,4 +1,11 @@
 #include "sort.h"
+
+/**
+ * quick_sort - quick sort algorithm
+ * @array: array to be sorted
+ * @size: size of the array
+ * Return: nothing
+ */
 void quick_sort(int *array, size_t size)
 {
 	if (array == NULL || size < 2)
@@ -6,15 +13,34 @@ void quick_sort(int *array, size_t size)
 	Quick_sort(array, size, 0, size - 1);
 }
 
+/**
+ * Quick_sort - quick sort algorithm
+ * @array: array to be sorted
+ * @size: size of the array
+ * @start: start index
+ * @end: end index
+ * Return: nothing
+ */
+
 void Quick_sort(int *array, size_t size, int start, int end)
 {
 	if (start < end)
 	{
 		int partition_index = Partition(array, size, start, end);
+
 		Quick_sort(array, size, start, partition_index - 1);
 		Quick_sort(array, size, partition_index + 1, end);
 	}
 }
+
+/**
+ * Partition - partition algorithm
+ * @array: array to be sorted
+ * @size: size of the array
+ * @start: start index
+ * @end: end index
+ * Return: nothing
+ */
 
 int Partition(int *array, size_t size, int start, int end)
 {
