@@ -1,64 +1,64 @@
 #include "sort.h"
 
 /**
- * quick_sort - quick sort algorithm
- * @array: array to be sorted
- * @size: size of the array
- * Return: nothing
+ * quick_sort - Sorts an array of integers in ascending order using Quick sort.
+ * @array: The array to be sorted.
+ * @size: The size of the array.
  */
 void quick_sort(int *array, size_t size)
 {
 	if (array == NULL || size < 2)
 		return;
-	Quick_sort(array, size, 0, size - 1);
+	Lomuto_QuickSort(array, size, 0, size - 1);
 }
 
 /**
- * Quick_sort - quick sort algorithm
- * @array: array to be sorted
- * @size: size of the array
- * @start: start index
- * @end: end index
- * Return: nothing
+ * Lomuto_Partition - Lomuto partition scheme for Quick sort.
+ * @array: The array to be partitioned.
+ * @size: The size of the array.
+ * @low: The starting index of the partition.
+ * @high: The ending index of the partition.
+ *
+ * Return: The index of the pivot element.
  */
-
-void Quick_sort(int *array, size_t size, int start, int end)
+int Lomuto_Partition(int *array, size_t size, int low, int high)
 {
-	if (start < end)
+	int pivot = array[high];
+	int i = low - 1;
+	int tmp, j;
+
+	for (j = low; j <= high - 1; j++)
 	{
-		int partition_index = Partition(array, size, start, end);
-
-		Quick_sort(array, size, start, partition_index - 1);
-		Quick_sort(array, size, partition_index + 1, end);
-	}
-}
-
-/**
- * Partition - partition algorithm
- * @array: array to be sorted
- * @size: size of the array
- * @start: start index
- * @end: end index
- * Return: nothing
- */
-
-int Partition(int *array, size_t size, int start, int end)
-{
-	int pivot = array[end];
-	int pIndex = start, tmp, i;
-
-	for (i = start; i < end; i++)
-	{
-		if (array[i] <= pivot)
+		if (array[j] <= pivot)
 		{
+			i++;
 			tmp = array[i];
-			array[i] = array[pIndex];
-			array[pIndex] = tmp;
-			pIndex++;
+			array[i] = array[j];
+			array[j] = tmp;
 		}
 	}
-	array[end] = array[pIndex];
-	array[pIndex] = pivot;
+
+	tmp = array[i + 1];
+	array[i + 1] = array[high];
+	array[high] = tmp;
 	print_array(array, size);
-	return (pIndex);
+	return (i + 1);
+}
+
+/**
+ * Lomuto_QuickSort - Lomuto Quick sort implementation.
+ * @array: The array to be sorted.
+ * @size: The size of the array.
+ * @low: The starting index of the partition.
+ * @high: The ending index of the partition.
+ */
+void Lomuto_QuickSort(int *array, size_t size, int low, int high)
+{
+	if (low < high)
+	{
+		int pivot_index = Lomuto_Partition(array, size, low, high);
+
+		Lomuto_QuickSort(array, size, low, pivot_index - 1);
+		Lomuto_QuickSort(array, size, pivot_index + 1, high);
+	}
 }
