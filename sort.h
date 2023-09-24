@@ -28,4 +28,5 @@ void selection_sort(int *array, size_t size);
 void quick_sort(int *array, size_t size);
 int Lomuto_Partition(int *array, size_t size, int low, int high);
 void Lomuto_QuickSort(int *array, size_t size, int low, int high);
+void quick_sort1(int *array, size_t size);
 #endif
