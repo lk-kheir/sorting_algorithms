@@ -27,7 +27,8 @@ void swap(int *a, int *b)
  */
 void quick_sort(int *array, size_t size)
 {
-	/* printf("ARRAY SIZE IS : %ld\n", size); */
+	if (array == NULL || size < 2)
+		return;
 	Quick_sort(array, 0, size - 1, size);
 }
 
@@ -46,6 +47,8 @@ void Quick_sort(int *array, int low, int high, size_t size)
 {
 	int pivot_index;
 
+	if (array == NULL)
+		return;
 	if (low < high)
 	{
 		pivot_index = lomuto_partition(array, low, high, size);
@@ -67,6 +70,7 @@ void Quick_sort(int *array, int low, int high, size_t size)
 int lomuto_partition(int *array, int low, int high, size_t size)
 {
 	int pivot, i, j;
+
 	pivot = array[high];
 	i = low - 1;
 
@@ -75,11 +79,11 @@ int lomuto_partition(int *array, int low, int high, size_t size)
 		if (array[j] <= pivot)
 		{
 			i++;
-			swap(&array[i], &array[j]);
+			if (i != j)
+				swap(&array[i], &array[j]);
 		}
 	}
 	swap(&array[i + 1], &array[high]);
 	print_array(array, size);
-	
 	return (i + 1);
 }
